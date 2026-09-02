@@ -1,0 +1,205 @@
+/* Fontes distintas */
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: orange;
+  color: #333;
+  text-align: center;
+}
+
+/* Cabeçalho */
+header {
+  background: #ff6600;
+  padding: 10px;
+}
+
+.bingo-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.ball {
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #ff6600;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  font-family: 'Luckiest Guy', cursive;
+}
+
+/* Navegação */
+nav button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: #ffe0b2;
+}
+
+/* Páginas */
+.pagina {
+  padding: 20px;
+}
+
+/* Login */
+#login {
+  background: #fff3e0;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+#login input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#login button:hover {
+  background: #e65100;
+}
+
+/* Dica de usuário/senha escondida */
+.login-dica {
+  font-size: 14px;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+/* Aparece no hover (desktop) ou no toque (mobile) */
+.login-dica:hover,
+.login-dica:active,
+.login-dica:focus {
+  color: #000;
+}
+
+/* Cartelas */
+.cartela {
+  border: 2px solid #333;
+  margin: 10px;
+  padding: 10px;
+  display: inline-block;
+  background: #fff;
+  border-radius: 10px;
+  width: 240px;
+}
+
+.cartela img {
+  max-width: 200px;
+  display: block;
+  margin: auto;
+}
+
+.numerosCartela {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.numItem {
+  border: 1px solid #666;
+  padding: 5px;
+  margin: 2px;
+  min-width: 35px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.numItem:hover {
+  background: #f0f0f0;
+}
+
+.numItem.sorteado {
+  background: #ff6600;
+  color: #fff;
+  font-weight: bold;
+  border-color: #cc5200;
+}
+
+/* Vencedores */
+.vencedorCartela {
+  border: 3px solid gold;
+  margin: 10px;
+  padding: 10px;
+  background: #fff8dc;
+  border-radius: 10px;
+}
+
+/* Sorteio organizado em colunas BINGO */
+.gridBingo {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.gridBingo span {
+  display: inline-block;
+  padding: 6px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.gridBingo span.sorteado {
+  background: #ff6600;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Estatísticas */
+#estatisticas {
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .cartela {
+    width: 90%;
+  }
+  .ball {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+  }
+  nav button {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+  .gridBingo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

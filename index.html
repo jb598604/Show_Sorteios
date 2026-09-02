@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bingo Show de Prêmios</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Tesseract.js para OCR -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2/dist/tesseract.min.js"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <header>
+    <div class="bingo-header">
+      <span class="ball">B</span><span class="ball">I</span><span class="ball">N</span><span class="ball">G</span><span class="ball">O</span>
+    </div>
+    <nav>
+      <button onclick="mostrarPagina('login')">Login</button>
+      <button id="btnCadastro" onclick="mostrarPagina('cadastro')" style="display:none;">Cadastro</button>
+      <button id="btnSorteio" onclick="mostrarPagina('sorteio')" style="display:none;">Sorteio</button>
+      <button id="btnCartelas" onclick="mostrarPagina('cartelas')" style="display:none;">Cartelas</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Login -->
+    <section id="login" class="pagina">
+      <h2>Login do Administrador</h2>
+      <input type="text" id="usuario" placeholder="Usuário">
+      <input type="password" id="senha" placeholder="Senha">
+      <button onclick="login()">Entrar</button>
+      <p class="login-dica">Usuário: <b>Bingo26</b> | Senha: <b>Euvoushow</b></p>
+    </section>
+
+    <!-- Cadastro -->
+    <section id="cadastro" class="pagina" style="display:none;">
+      <h3>Adicionar Cartela</h3>
+      <input type="text" id="nomeCartela" placeholder="Nome da cartela">
+
+      <!-- Escolher imagem -->
+      <label>Escolher imagem:</label>
+      <input type="file" id="fotoCartela" accept="image/*" capture="environment">
+      <button onclick="processarCartela()">Adicionar Cartela</button>
+
+      <!-- Usar câmera -->
+      <button onclick="abrirCamera()">📷 Usar Câmera</button>
+      <div id="webcamArea" style="display:none;">
+        <video id="camera" autoplay playsinline></video><br>
+        <button onclick="tirarFoto()">📸 Tirar Foto</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+        <button id="btnSalvarFoto" style="display:none;" onclick="salvarFotoCartela()">Adicionar Cartela</button>
+      </div>
+    </section>
+
+    <!-- Sorteio -->
+    <section id="sorteio" class="pagina" style="display:none;">
+      <h2>Sorteio</h2>
+      <div id="numerosSorteados" class="gridBingo"></div>
+      <button onclick="reiniciarSorteio()">🔄 Reiniciar Sorteio</button>
+      <h3>Estatísticas</h3>
+      <div id="estatisticas"></div>
+      <h3>Cartelas vencedoras detectadas</h3>
+      <div id="vencedor"></div>
+      <div id="cadastroVencedor">
+        <h3>Cadastro Manual de Vencedor</h3>
+        <input type="text" id="nomeVencedor" placeholder="Nome do vencedor">
+        <input type="text" id="cidadeVencedor" placeholder="Cidade">
+        <input type="text" id="premioVencedor" placeholder="Prêmio">
+        <input type="text" id="idCartelaVencedor" placeholder="ID da cartela (opcional)">
+        <button onclick="cadastrarVencedorManual()">Salvar Vencedor</button>
+      </div>
+      <div id="listaVencedores"><h3>Histórico de vencedores</h3></div>
+    </section>
+
+    <!-- Cartelas -->
+    <section id="cartelas" class="pagina" style="display:none;">
+      <h2>Cartelas Cadastradas</h2>
+      <div id="listaCartelas"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

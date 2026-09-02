@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartela - Bingo Show de Prêmios</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Cartela do Participante</h1>
+  </header>
+
+  <main>
+    <!-- Cartela do jogador -->
+    <div id="cartela"></div>
+
+    <!-- Status da cartela -->
+    <div id="status"></div>
+
+    <!-- Estatísticas gerais -->
+    <div id="estatisticas"></div>
+
+    <!-- Números já sorteados -->
+    <div id="numerosJaSorteados"></div>
+
+    <!-- Áudio de vitória -->
+    <audio id="bingoSound" src="bingo.mp3"></audio>
+
+    <!-- Lista de vencedores cadastrados -->
+    <div id="vencedoresCartela">
+      <h3>🏆 Vencedores já cadastrados</h3>
+      <!-- O cartela.js vai preencher automaticamente -->
+    </div>
+  </main>
+
+  <!-- Script específico da cartela -->
+  <script src="cartela.js"></script>
+</body>
+</html>
