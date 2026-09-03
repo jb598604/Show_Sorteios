@@ -39,5 +39,18 @@
 
   <!-- Script específico da cartela -->
   <script src="cartela.js"></script>
+
+  <script>
+    // Tenta ativar voz logo ao carregar (funciona no PC; no celular depende da política do navegador)
+    window.addEventListener("load", () => {
+      try {
+        const teste = new SpeechSynthesisUtterance("Cartela carregada com sucesso");
+        teste.lang = "pt-BR";
+        speechSynthesis.speak(teste);
+      } catch (e) {
+        console.warn("Navegador bloqueou voz até interação.");
+      }
+    });
+  </script>
 </body>
 </html>

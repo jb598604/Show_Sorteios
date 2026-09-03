@@ -137,3 +137,23 @@ function carregarVencedoresCartela() {
 
 // Chamar logo ao carregar
 carregarVencedoresCartela();
+
+// Tentativa de ativar voz automática (PC funciona, celular depende do navegador)
+window.addEventListener("load", () => {
+  try {
+    const teste = new SpeechSynthesisUtterance("Cartela carregada com sucesso");
+    teste.lang = "pt-BR";
+    speechSynthesis.speak(teste);
+  } catch (e) {
+    console.warn("Voz bloqueada até interação.");
+  }
+});
+
+// Se o navegador exigir interação, libera no primeiro toque
+document.body.addEventListener("click", () => {
+  if (!speechSynthesis.speaking) {
+    const liberar = new SpeechSynthesisUtterance("Voz ativada");
+    liberar.lang = "pt-BR";
+    speechSynthesis.speak(liberar);
+  }
+}, { once: true });

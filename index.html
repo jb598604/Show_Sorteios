@@ -45,12 +45,16 @@
       <button onclick="processarCartela()">Adicionar Cartela</button>
 
       <!-- Usar câmera -->
-      <button onclick="abrirCamera()">📷 Usar Câmera</button>
+      <button onclick="abrirCamera('environment')">📷 Usar Câmera Traseira</button>
+      <button onclick="abrirCamera('user')">🤳 Usar Câmera Frontal</button>
       <div id="webcamArea" style="display:none;">
-        <video id="camera" autoplay playsinline></video><br>
+        <video id="camera" autoplay playsinline style="width:100%;height:auto;"></video><br>
         <button onclick="tirarFoto()">📸 Tirar Foto</button>
         <canvas id="canvas" style="display:none;"></canvas>
         <button id="btnSalvarFoto" style="display:none;" onclick="salvarFotoCartela()">Adicionar Cartela</button>
+        <br>
+        <button onclick="ativarFlash()">💡 Flash On</button>
+        <button onclick="desativarFlash()">❌ Flash Off</button>
       </div>
     </section>
 

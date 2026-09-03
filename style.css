@@ -95,7 +95,6 @@ nav button:hover {
   transition: color 0.3s ease;
 }
 
-/* Aparece no hover (desktop) ou no toque (mobile) */
 .login-dica:hover,
 .login-dica:active,
 .login-dica:focus {
@@ -184,6 +183,45 @@ nav button:hover {
   font-weight: bold;
 }
 
+/* Área da câmera */
+#webcamArea {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff3e0;
+  border-radius: 10px;
+  display: none;
+}
+
+#camera {
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid #ff6600;
+  border-radius: 8px;
+}
+
+#canvas {
+  display: none;
+  margin-top: 10px;
+  max-width: 400px;
+  border: 1px solid #ccc;
+}
+
+/* Botões da câmera e flash */
+#webcamArea button {
+  margin: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#webcamArea button:hover {
+  background: #e65100;
+}
+
 /* Responsividade */
 @media (max-width: 600px) {
   .cartela {
@@ -201,5 +239,8 @@ nav button:hover {
   }
   .gridBingo {
     grid-template-columns: repeat(3, 1fr);
+  }
+  #camera, #canvas {
+    max-width: 100%;
   }
 }

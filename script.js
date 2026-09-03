@@ -50,7 +50,7 @@ function login() {
   }
 }
 
-// Cadastro de cartela com OCR (imagem escolhida)
+// Cadastro de cartela com OCR
 function processarCartela() {
   const foto = document.getElementById("fotoCartela").files[0];
   const nome = document.getElementById("nomeCartela").value.trim();
@@ -72,20 +72,22 @@ function processarCartela() {
   reader.readAsDataURL(foto);
 }
 
-// Funções da webcam (PC)
-function abrirCamera() {
+// 📷 Funções da câmera
+function abrirCamera(tipo = "environment") {
   document.getElementById("webcamArea").style.display = "block";
-  iniciarCamera();
+  iniciarCamera(tipo);
 }
 
-async function iniciarCamera() {
+async function iniciarCamera(tipo) {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    document.getElementById("camera").srcObject = stream;
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: tipo } });
+    const video = document.getElementById("camera");
+    video.srcObject = stream;
+    video.style.width = "100%";
+    video.style.height = "auto";
   } catch (err) {
     console.error("Erro ao acessar a câmera:", err);
-    const area = document.getElementById("webcamArea");
-    if (area) area.style.display = "none";
+    document.getElementById("webcamArea").style.display = "none";
   }
 }
 
@@ -93,28 +95,56 @@ function tirarFoto() {
   const video = document.getElementById("camera");
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  // Mostra botão de salvar
   document.getElementById("btnSalvarFoto").style.display = "inline-block";
 }
 
 function salvarFotoCartela() {
   const nome = document.getElementById("nomeCartela").value.trim();
   if (!nome) { alert("Digite o nome da cartela!"); return; }
-
   const canvas = document.getElementById("canvas");
   const imagemBase64 = canvas.toDataURL("image/png");
-
   const novaCartela = { nome, imagem: imagemBase64, numeros: [] };
   const id = Date.now();
   db.ref("cartelas/" + id).set(novaCartela);
   alert("Cartela cadastrada com sucesso!");
   document.getElementById("btnSalvarFoto").style.display = "none";
 }
+
+// 🔦 Flash
+async function ativarFlash() {
+  const track = document.getElementById("camera").srcObject.getVideoTracks()[0];
+  const caps = track.getCapabilities();
+  if (caps.torch) {
+    await track.applyConstraints({ advanced: [{ torch: true }] });
+  } else {
+    alert("Flash não suportado neste dispositivo.");
+  }
+}
+async function desativarFlash() {
+  const track = document.getElementById("camera").srcObject.getVideoTracks()[0];
+  await track.applyConstraints({ advanced: [{ torch: false }] });
+}
+
+// 🔊 Voz automática
+window.addEventListener("load", () => {
+  try {
+    const teste = new SpeechSynthesisUtterance("Bem-vindo ao Bingo Show de Prêmios");
+    teste.lang = "pt-BR";
+    speechSynthesis.speak(teste);
+  } catch (e) {
+    console.warn("Voz bloqueada até interação.");
+  }
+});
+document.body.addEventListener("click", () => {
+  if (!speechSynthesis.speaking) {
+    const liberar = new SpeechSynthesisUtterance("Voz ativada");
+    liberar.lang = "pt-BR";
+    speechSynthesis.speak(liberar);
+  }
+}, { once: true });
 
 // Carregar cartelas cadastradas
 function carregarCartelas() {
